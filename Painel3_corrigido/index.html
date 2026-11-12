@@ -96,6 +96,165 @@
             <p class="aviso">Os dados ficam salvos neste navegador e neste computador. Não são enviados para um servidor.</p>
         </section>
 
+    </section>
+
+    <!-- ==================================================
+         SEÇÃO DIDÁTICA: PAINEL DO DESENVOLVEDOR
+         Explicação sobre JSON, fetch() e .json()
+    ================================================== -->
+    <section class="painel" aria-labelledby="titulo-desenvolvedor">
+
+        <h2 id="titulo-desenvolvedor">
+            Painel do Desenvolvedor — Entendendo o JSON
+        </h2>
+
+        <p>
+            Nesta seção, explicamos como o sistema utiliza
+            JavaScript e JSON para consultar informações
+            de endereços por meio da API ViaCEP.
+        </p>
+
+        <!-- 1. O QUE É JSON? -->
+        <div class="campo">
+            <h3>1. O que é JSON?</h3>
+
+            <p>
+                JSON (JavaScript Object Notation) é um formato
+                de texto utilizado para organizar e trocar
+                informações entre sistemas.
+
+                Os dados são estruturados em pares de
+                chave e valor, facilitando a leitura e
+                o processamento pelo JavaScript.
+            </p>
+
+            <p>Exemplo de resposta JSON do ViaCEP:</p>
+
+            <pre><code>{
+"cep": "01001-000",
+"logradouro": "Praça da Sé",
+"bairro": "Sé",
+"localidade": "São Paulo",
+"uf": "SP"
+}</code></pre>
+
+            <p>
+                Nesse exemplo, "localidade" é uma chave
+                e "São Paulo" é seu valor.
+            </p>
+        </div>
+
+        <!-- 2. COMO FUNCIONA A REQUISIÇÃO? -->
+        <div class="campo">
+            <h3>2. Como a requisição funciona no navegador?</h3>
+
+            <p>
+                O JavaScript utiliza a função fetch()
+                para solicitar informações de uma API
+                pela internet.
+
+                No nosso projeto, o fetch() consulta
+                o ViaCEP utilizando o CEP informado
+                pelo usuário.
+
+                Essa requisição acontece de maneira
+                assíncrona, permitindo que a página
+                continue funcionando sem precisar
+                ser recarregada.
+            </p>
+
+            <p>Exemplo:</p>
+
+            <pre><code>fetch("https://viacep.com.br/ws/01001000/json/")
+.then(resposta => resposta.json())
+.then(dados => {
+    console.log(dados);
+});</code></pre>
+
+            <p>
+                O fetch() envia a solicitação ao ViaCEP
+                e recebe uma resposta com as informações
+                correspondentes ao CEP pesquisado.
+            </p>
+        </div>
+
+        <!-- 3. COMO O JAVASCRIPT UTILIZA O JSON? -->
+        <div class="campo">
+            <h3>3. Como o JavaScript utiliza a resposta?</h3>
+
+            <p>
+                Após receber a resposta da API,
+                o JavaScript utiliza o método .json()
+                para interpretar o conteúdo JSON
+                e transformá-lo em um objeto JavaScript.
+
+                Dessa forma, podemos acessar os dados
+                utilizando suas respectivas chaves.
+            </p>
+
+            <p>Exemplo:</p>
+
+            <pre><code>fetch("https://viacep.com.br/ws/01001000/json/")
+.then(resposta => resposta.json())
+.then(dados => {
+
+    // Acessa a cidade retornada pela API
+    const cidade = dados.localidade;
+
+    // Acessa o estado retornado pela API
+    const estado = dados.uf;
+
+    // Exibe a cidade e o estado
+    console.log(cidade + " / " + estado);
+
+});</code></pre>
+
+            <p>
+                No sistema da clínica, essas informações
+                são utilizadas para preencher
+                automaticamente o campo Cidade / UF
+                do formulário de cadastro.
+            </p>
+        </div>
+
+        <!-- RESUMO DO FUNCIONAMENTO -->
+        <div class="campo">
+            <h3>Resumo do funcionamento</h3>
+
+            <p>
+                1. O usuário digita o CEP no formulário.
+            </p>
+
+            <p>
+                2. O fetch() consulta a API ViaCEP.
+            </p>
+
+            <p>
+                3. A API retorna os dados no formato JSON.
+            </p>
+
+            <p>
+                4. O método .json() transforma a resposta
+                em um objeto JavaScript.
+            </p>
+
+            <p>
+                5. O JavaScript utiliza os dados para
+                preencher automaticamente Cidade / UF.
+            </p>
+        </div>
+
+    </section>
+
+    <!-- RODAPÉ DO PROJETO -->
+    <footer>
+        Projeto acadêmico — Painel de Saúde da Clínica de Bem-Estar
+    </footer>
+
+</main>
+</body>
+</html>
+
         <footer>Projeto acadêmico — Painel de Saúde da Clínica de Bem-Estar</footer>
     </main>
 </body>
